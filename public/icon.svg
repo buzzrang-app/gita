@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#F5EFE4" rx="100"/>
+  <circle cx="256" cy="256" r="180" fill="#191815" />
+  <circle cx="256" cy="256" r="140" fill="#D97706" />
+  <!-- Sacred Sudarshana / Chariot Wheel Spoke Motif -->
+  <g stroke="#F5EFE4" stroke-width="8" stroke-linecap="round">
+    <line x1="256" y1="120" x2="256" y2="392" />
+    <line x1="120" y1="256" x2="392" y2="256" />
+    <line x1="160" y1="160" x2="352" y2="352" />
+    <line x1="160" y1="352" x2="352" y2="160" />
+  </g>
+  <circle cx="256" cy="256" r="46" fill="#191815" stroke="#F5EFE4" stroke-width="8"/>
+  <circle cx="256" cy="256" r="16" fill="#D97706" />
+</svg>

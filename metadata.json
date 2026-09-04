@@ -1,0 +1,6 @@
+{
+  "name": "Bhagavad Gita Flip",
+  "description": "Mobile-first PWA reading app for the Bhagavad Gita with physical vertical page-flip storytelling and cinematic illustrations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
