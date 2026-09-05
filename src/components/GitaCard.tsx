@@ -37,45 +37,78 @@ export const GitaCard: React.FC<GitaCardProps> = ({
   const chapterLabel = `CHAPTER ${String(page.chapter).padStart(2, '0')} · PART ${String(page.part).padStart(2, '0')}`;
 
   // =========================================================================
-  // TOP HALF: Cinematic Illustration (50% of card)
+  // TOP HALF OF CARD (Represents top 50% of card)
+  // Contains:
+  // - 70% of top half (= 35% of total card): Image
+  // - 30% of top half (= 15% of total card): Chapter tag & small title
   // =========================================================================
   const renderTopHalf = () => (
-    <div className="relative w-full h-full bg-[#121110] overflow-hidden select-none">
-      <img
-        src={page.imageSrc}
-        alt={page.imageAlt}
-        className="w-full h-full object-cover object-center pointer-events-none select-none transition-transform duration-700 ease-out"
-        draggable={false}
-        loading="eager"
-        referrerPolicy="no-referrer"
-      />
+    <div className="relative w-full h-full flex flex-col bg-[#F5EFE4] text-[#191815] overflow-hidden select-none">
+      {/* 35% of total card (70% of top half) */}
+      <div className="relative w-full h-[70%] bg-[#121110] overflow-hidden">
+        <img
+          src={page.imageSrc}
+          alt={page.imageAlt}
+          className="w-full h-full object-cover object-center pointer-events-none select-none"
+          draggable={false}
+          loading="eager"
+          referrerPolicy="no-referrer"
+        />
 
-      {/* Cinematic gradient overlay matching Artistic Flair */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/20 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#F5EFE4]/30 to-transparent pointer-events-none" />
+        {/* Subtle cinematic overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[#F5EFE4]/30 to-transparent pointer-events-none" />
 
-      {/* Minimal Sanskrit quick badge in top-right for authentic immersion */}
-      {page.sanskritVerse && (
-        <button
-          id={`btn-sanskrit-${page.id}-${half}`}
-          type="button"
-          onClick={handleSanskritClick}
-          className="absolute top-16 right-5 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/35 backdrop-blur-md border border-amber-500/30 text-amber-200/90 text-[10px] font-sans font-medium tracking-wide shadow-md active:scale-95 transition"
-          title="Read Original Sanskrit Shloka"
-        >
-          <Sparkles className="w-3 h-3 text-[#D97706]" />
-          <span>Sanskrit Shloka</span>
-        </button>
-      )}
+        {/* Minimal Sanskrit quick badge in top-right */}
+        {/* {page.sanskritVerse && (
+          <button
+            id={`btn-sanskrit-${page.id}-${half}`}
+            type="button"
+            onClick={handleSanskritClick}
+            className="absolute bottom-3 right-3 z-20 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-amber-500/35 text-amber-200 text-[9.5px] font-sans font-medium tracking-wide shadow-md active:scale-95 transition"
+            title="Read Original Sanskrit Shloka"
+          >
+            <Sparkles className="w-2.5 h-2.5 text-[#D97706]" />
+            <span>Sanskrit Shloka</span>
+          </button>
+        )} */}
+      </div>
+
+      {/* 15% of total card (30% of top half): Chapter Tag & Small Refined Title */}
+      <div className="relative w-full h-[30%] px-5 py-2.5 sm:px-6 sm:py-3 flex flex-col justify-center border-b border-[#191815]/5 bg-[#F5EFE4]">
+        {/* Paper texture */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
+          }}
+        />
+
+        <div className="relative z-10">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="h-[1.5px] w-5 bg-[#D97706] flex-shrink-0" />
+            <span className="text-[9.5px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold text-[#746E64]">
+              {chapterLabel}
+            </span>
+          </div>
+
+          <h2 className="text-[15px] sm:text-[17px] md:text-[18px] leading-tight font-serif font-bold text-[#191815] tracking-normal line-clamp-2">
+            {page.editorialHeadline}
+          </h2>
+        </div>
+      </div>
     </div>
   );
 
   // =========================================================================
-  // BOTTOM HALF: Warm Paper Editorial Story (50% of card)
+  // BOTTOM HALF OF CARD (Represents bottom 50% of card)
+  // Contains:
+  // - 100% of bottom half (= 50% of total card): Generous Reading Narrative & Meta
   // =========================================================================
   const renderBottomHalf = () => (
-    <div className="relative w-full h-full flex flex-col justify-between p-5 sm:p-7 bg-[#F5EFE4] text-[#191815] overflow-hidden select-none">
-      {/* Subtle Paper Texture Overlay from Artistic Flair design */}
+    <div className="relative w-full h-full flex flex-col justify-between px-5 pt-3 pb-3 sm:px-6 sm:pt-4 sm:pb-4 bg-[#F5EFE4] text-[#191815] overflow-hidden select-none">
+      {/* Subtle Paper Texture */}
       <div
         className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{
@@ -84,39 +117,26 @@ export const GitaCard: React.FC<GitaCardProps> = ({
         }}
       />
 
-      {/* Content Body */}
-      <div className="flex flex-col relative z-10 min-h-0 flex-1 justify-center">
-        {/* Label with horizontal accent bar */}
-        <div className="flex items-center gap-2.5 mb-1.5 sm:mb-2">
-          <div className="h-[1px] w-7 bg-[#D97706] flex-shrink-0" />
-          <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-semibold text-[#746E64]">
-            {chapterLabel}
-          </span>
-        </div>
-
-        {/* Large Editorial Headline */}
-        <h2 className="text-[22px] sm:text-[26px] md:text-[30px] leading-[1.12] font-serif font-bold text-[#191815] uppercase tracking-tight whitespace-pre-line mb-2 sm:mb-3">
-          {page.editorialHeadline}
-        </h2>
-
-        {/* Story prose with bold highlighted concepts */}
+      {/* Expanded Story Reading Content */}
+      <div className="relative z-10 flex-1 min-h-0 overflow-y-auto overscroll-contain pr-1 flex flex-col justify-start">
         <div
-          className="text-[14px] sm:text-[15.5px] leading-relaxed text-[#191815]/85 font-normal line-clamp-4 sm:line-clamp-5 max-w-prose"
+          className="text-[12.5px] sm:text-[14px] leading-[1.62] text-[#24211D] font-normal font-serif tracking-normal"
           dangerouslySetInnerHTML={{
             __html: page.storyHtml
-              .replace(/\n\n/g, '<p class="mt-2">')
-              .replace(/\n/g, ' '),
+              .split('\n\n')
+              .map((para) => `<p class="mb-2 sm:mb-2.5 last:mb-0">${para.replace(/\n/g, ' ')}</p>`)
+              .join(''),
           }}
         />
       </div>
 
-      {/* Footer Info matching Artistic Flair */}
-      <div className="flex justify-between items-end pt-3 sm:pt-4 border-t border-[#191815]/10 relative z-10 select-none flex-shrink-0">
-        <div className="text-[11px] font-semibold text-[#746E64] uppercase tracking-wider flex items-center gap-1.5">
+      {/* Footer Info */}
+      <div className="flex justify-between items-center pt-2 sm:pt-2.5 border-t border-[#191815]/10 relative z-10 select-none flex-shrink-0 mt-1">
+        <div className="text-[10.5px] sm:text-[11px] font-semibold text-[#746E64] uppercase tracking-wider flex items-center gap-1.5">
           <BookOpen className="w-3.5 h-3.5 text-[#D97706]" />
           <span>{page.verseRef}</span>
         </div>
-        <div className="text-[11px] font-bold text-[#191815] bg-[#D97706]/10 px-2.5 py-1 rounded">
+        <div className="text-[10px] sm:text-[11px] font-bold text-[#191815] bg-[#D97706]/15 px-2 py-0.5 rounded font-mono">
           {formattedIndex} / {formattedTotal}
         </div>
       </div>
